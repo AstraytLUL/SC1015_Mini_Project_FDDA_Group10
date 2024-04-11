@@ -20,7 +20,7 @@ def cost(player, enemies, bag): # Cost Function = max(E1 HP, E2 HP) + 10^18 * Wi
 
 def Greedy():
     actions = [] # Initial Sequence
-    while answer == []: # Start of UCS
+    while answer == []: # Start of Greedy
         if answer != []:
             break
         CurCost = 2 * 10 ** 18
@@ -33,7 +33,7 @@ def Greedy():
                     temp2 = copy.deepcopy(temp) 
                     temp2.append(target)
                     player, enemies, bag, result = battle(temp2) # Get info for calculating cost
-                    if result == "Victory!": # If won, we found the answer, no more UCS required
+                    if result == "Victory!": # If won, we found the answer, no more greedy required
                         answer = temp2
                         break
                     elif result == "You Died. Restart?" or result == "Invalid command":
@@ -47,7 +47,7 @@ def Greedy():
             else:
                 temp.append("Y")
                 player, enemies, bag, result = battle(temp) # Get info for calculating cost
-                if result == "Victory!": # If won, we found the answer, no more UCS required
+                if result == "Victory!": # If won, we found the answer, no more greedy required
                     answer = temp
                     break
                 elif result == "You Died. Restart?" or result == "Invalid command":
