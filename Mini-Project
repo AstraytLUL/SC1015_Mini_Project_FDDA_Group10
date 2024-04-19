@@ -1,1 +1,55 @@
+import nltk
+from nltk.sentiment.vader import SentimentIntensityAnalyzer
+from newsapi import NewsApiClient
+
+# Initialize NLTK VADER
+sid = SentimentIntensityAnalyzer()
+
+# Initialize News API client
+newsapi = NewsApiClient(api_key='914be23b04494c8dab1c61a678f59569')
+
+# Function to analyze sentiment of news articles from a source
+def analyze_source_sentiment(source_name, articles):
+    print(f"Sentiment analysis for {source_name}:")
+    source_sentiment = {'pos': 0, 'neu': 0, 'neg': 0}
+    num_articles_analyzed = 0
+    for article in articles:
+        title = article.get('title')
+        description = article.get('description')
+        if title is None or description is None:
+            continue  # Skip articles with missing title or description
+        text = title + '. ' + description  # Combine title and description for analysis
+        scores = sid.polarity_scores(text)
+        source_sentiment['pos'] += scores['pos']
+        source_sentiment['neu'] += scores['neu']
+        source_sentiment['neg'] += scores['neg']
+        num_articles_analyzed += 1
+    if num_articles_analyzed > 0:
+        source_sentiment = {k: v / num_articles_analyzed for k, v in source_sentiment.items()}  # Calculate average scores
+    print("Positive sentiment:", source_sentiment['pos'])
+    print("Neutral sentiment:", source_sentiment['neu'])
+    print("Negative sentiment:", source_sentiment['neg'])
+    print()
+
+# Get sources
+sources = newsapi.get_sources()
+
+# Find source ID for investing.com
+investing_source_id = None
+for source in sources['sources']:
+    if source['name'] == 'Investing.com':
+        investing_source_id = source['id']
+        break
+
+# Check if investing.com source ID is found
+if investing_source_id:
+    # Get articles from investing.com containing "ethereum" in title
+    print(f"Fetching articles from Investing.com...")
+    articles = newsapi.get_everything(sources=investing_source_id, language='en', q='ethereum')['articles']
+    if articles:
+        analyze_source_sentiment("Investing.com", articles)
+    else:
+        print("No articles found from Investing.com containing 'ethereum' in the title")
+else:
+    print("Investing.com source not found")
 
