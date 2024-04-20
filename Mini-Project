@@ -1,55 +1,46 @@
-import nltk
-from nltk.sentiment.vader import SentimentIntensityAnalyzer
-from newsapi import NewsApiClient
+import requests
+from bs4 import BeautifulSoup
+import csv
+from datetime import datetime, timedelta
 
-# Initialize NLTK VADER
-sid = SentimentIntensityAnalyzer()
+def scrape_ethereum_news():
+    # Define the URL of the Ethereum news section on investing.com
+    url = 'https://www.investing.com/crypto/ethereum/news'
 
-# Initialize News API client
-newsapi = NewsApiClient(api_key='914be23b04494c8dab1c61a678f59569')
+    # Make a GET request to the URL
+    response = requests.get(url)
 
-# Function to analyze sentiment of news articles from a source
-def analyze_source_sentiment(source_name, articles):
-    print(f"Sentiment analysis for {source_name}:")
-    source_sentiment = {'pos': 0, 'neu': 0, 'neg': 0}
-    num_articles_analyzed = 0
-    for article in articles:
-        title = article.get('title')
-        description = article.get('description')
-        if title is None or description is None:
-            continue  # Skip articles with missing title or description
-        text = title + '. ' + description  # Combine title and description for analysis
-        scores = sid.polarity_scores(text)
-        source_sentiment['pos'] += scores['pos']
-        source_sentiment['neu'] += scores['neu']
-        source_sentiment['neg'] += scores['neg']
-        num_articles_analyzed += 1
-    if num_articles_analyzed > 0:
-        source_sentiment = {k: v / num_articles_analyzed for k, v in source_sentiment.items()}  # Calculate average scores
-    print("Positive sentiment:", source_sentiment['pos'])
-    print("Neutral sentiment:", source_sentiment['neu'])
-    print("Negative sentiment:", source_sentiment['neg'])
-    print()
+    # Check if the request was successful
+    print(response.status_code)
+    if response.status_code == 200:
+        # Parse the HTML content of the page
+        soup = BeautifulSoup(response.content, 'html.parser')
 
-# Get sources
-sources = newsapi.get_sources()
+        # Find all news articles
+        news_articles = soup.find_all('article')
 
-# Find source ID for investing.com
-investing_source_id = None
-for source in sources['sources']:
-    if source['name'] == 'Investing.com':
-        investing_source_id = source['id']
-        break
+        # Open a CSV file in write mode
+        with open('ethereum_news.csv', 'w', newline='', encoding='utf-8') as csvfile:
+            # Define CSV writer
+            writer = csv.writer(csvfile)
 
-# Check if investing.com source ID is found
-if investing_source_id:
-    # Get articles from investing.com containing "ethereum" in title
-    print(f"Fetching articles from Investing.com...")
-    articles = newsapi.get_everything(sources=investing_source_id, language='en', q='ethereum')['articles']
-    if articles:
-        analyze_source_sentiment("Investing.com", articles)
+            # Write header row
+            writer.writerow(['Title', 'Description'])
+
+            # Iterate over news articles
+            for article in news_articles:
+                # Extract title
+                title = article.find('a', class_='title').text.strip()
+
+                # Extract description
+                description = article.find('div', class_='textDiv').text.strip()
+
+                # Write title and description to CSV file
+                writer.writerow([title, description])
+
+        print("Ethereum news scraped successfully!")
     else:
-        print("No articles found from Investing.com containing 'ethereum' in the title")
-else:
-    print("Investing.com source not found")
+        print("Failed to retrieve Ethereum news.")
 
+if __name__ == "__main__":
+    scrape_ethereum_news()
