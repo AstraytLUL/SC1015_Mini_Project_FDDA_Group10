@@ -19,6 +19,26 @@ Used "Ethereum Historical Data" from Kaggle with the following datasets:
 3. AMD/NVDA Stock Prices (From Yahoo Finance)
 4. Created our own data set from news section in Ethereum category of investing.com - Ethereum Sentiment Data
 
+WHAT WE LEARNT:
+- Vader Sentiment Analysis
+- Web Scraping
+- Gradient Boosted Model
+
+OUTCOME:
+
+We have managed to produce a predictor of Ethereum price based on historical data as well as a tool to decide if we should purchase or sell Ethereum depending on the change in Bitcoin price the previous day.
+
+INSIGHTS:
+
+
+- Ethereum is closely linked to Bitcoin and the GPU industry
+
+- Do not trade based off the Fear & Greed Index of Crypto, it is not a good predictor of future data
+
+- Avoid relying on investing.com news for Ethereum predictions due to its limited predictive value.  Exercise caution when using VADER for financial news sentiment analysis, as it may not be reliable.
+
+
+
 
 REFERENCES:
 
