@@ -10,7 +10,8 @@ Wang Min-Jen (U2320226D)
 
 ### Instructor 
 
-Kuzmin Nikita
+Course Instructor: Dr Smitha K G (Co-Ord) and Mr. Ong Chin Ann
+Teaching Assistant: Kuzmin Nikita
 
 ### PROBLEM DEFINITION:
 
