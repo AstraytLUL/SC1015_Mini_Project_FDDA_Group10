@@ -41,8 +41,10 @@ We have managed to produce a predictor of Ethereum price based on historical dat
 ### REFERENCES:
 
 https://www.kaggle.com/datasets/kapturovalexander/bitcoin-and-ethereum-prices-from-start-to-2023
-
-
+https://finance.yahoo.com/quote/NVDA/history/
+https://finance.yahoo.com/quote/AMD/history/
+https://finance.yahoo.com/quote/ETH-USD/history/
+https://scikit-learn.org/stable/auto_examples/ensemble/plot_gradient_boosting_regression.html
 
 
 
