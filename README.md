@@ -1,5 +1,18 @@
-# Ethereum Price Prediction:
+# SC1015 Mini-Project - Ethereum Price Prediction:
 
+## Info
+
+Lab FDDA, Group 10
+
+### Members
+
+Werner Soon Shi Xu (U2320610D)
+Ramanujam Mohanraj Nivetha (U2323405J)
+Wang Min-Jen (U2320226D)
+
+### Instructor 
+
+Kuzmin Nikita
 
 ### PROBLEM DEFINITION:
 
