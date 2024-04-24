@@ -57,6 +57,7 @@ https://finance.yahoo.com/quote/NVDA/history/
 https://finance.yahoo.com/quote/AMD/history/
 https://finance.yahoo.com/quote/ETH-USD/history/
 https://scikit-learn.org/stable/auto_examples/ensemble/plot_gradient_boosting_regression.html
+https://www.investing.com/crypto/ethereum/news
 
 
 
