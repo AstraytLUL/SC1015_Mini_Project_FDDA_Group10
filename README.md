@@ -10,6 +10,7 @@
    This is so that we can use the value of that factor related to predict the price of Ethereum
 2. Plot the linear regression to estimate the future price of Ethereum
 3. Use classification table to determine whether to purchase Ethereum based of historical data
+4. Use Gradiant Boosted Model
 
 ### DATASETS USED:
 
