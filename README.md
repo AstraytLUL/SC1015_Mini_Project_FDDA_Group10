@@ -1,7 +1,5 @@
 # SC1015 Mini-Project - Ethereum Price Prediction:
 
-## Info
-
 Lab FDDA, Group 10
 
 ### Members
